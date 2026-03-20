@@ -1,35 +1,322 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document Gallery</title>
+    <title>Galería</title>
     <style>
-        body {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            background-color: #f0f0f0;
+        * {
             margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #fafafa;
+            padding: 40px 20px;
+            min-height: 100vh;
+        }
+
+        .gallery {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 24px;
             padding: 20px;
         }
-        .item {
-            margin: 10px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+
+        .gallery-item {
+            position: relative;
+            cursor: pointer;
             overflow: hidden;
+            border-radius: 4px;
+            background: #fff;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            aspect-ratio: 4/3;
         }
-        img, .document {
+
+        .gallery-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .gallery-item.pdf {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 48px;
+        }
+
+        .gallery-item.pdf::after {
+            content: '📄';
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 1000;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            max-width: 90%;
+            max-height: 90%;
+            position: relative;
+            animation: zoomIn 0.3s ease;
+        }
+
+        .modal-content img {
             max-width: 100%;
-            border-bottom: 1px solid #ccc;
+            max-height: 90vh;
+            display: block;
+            border-radius: 4px;
+        }
+
+        .modal-content iframe {
+            width: 90vw;
+            height: 90vh;
+            border: none;
+            border-radius: 4px;
+            background: white;
+        }
+
+        .modal-close {
+            position: fixed;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 40px;
+            cursor: pointer;
+            z-index: 1001;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .modal-close:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: rotate(90deg);
+        }
+
+        .modal-nav {
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            color: white;
+            font-size: 48px;
+            cursor: pointer;
+            z-index: 1001;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            user-select: none;
+        }
+
+        .modal-nav:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .modal-prev {
+            left: 20px;
+        }
+
+        .modal-next {
+            right: 20px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes zoomIn {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        @media (max-width: 768px) {
+            .gallery {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+                gap: 12px;
+                padding: 10px;
+            }
+
+            body {
+                padding: 20px 10px;
+            }
+
+            .modal-nav {
+                width: 45px;
+                height: 45px;
+                font-size: 32px;
+            }
+
+            .modal-close {
+                width: 40px;
+                height: 40px;
+                font-size: 32px;
+                top: 15px;
+                right: 15px;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="item"><img src="path/to/photo1.jpg" alt="Photo 1"></div>
-    <div class="item"><img src="path/to/photo2.jpg" alt="Photo 2"></div>
-    <div class="item"><img src="path/to/photo3.jpg" alt="Photo 3"></div>
-    <div class="item"><a class="document" href="path/to/document1.pdf">Document 1</a></div>
-    <div class="item"><a class="document" href="path/to/document2.pdf">Document 2</a></div>
+    <div class="gallery" id="gallery"></div>
+
+    <div class="modal" id="modal">
+        <div class="modal-close" onclick="closeModal()">&times;</div>
+        <div class="modal-prev modal-nav" onclick="navigate(-1)">&#8249;</div>
+        <div class="modal-next modal-nav" onclick="navigate(1)">&#8250;</div>
+        <div class="modal-content" id="modalContent"></div>
+    </div>
+
+    <script>
+        // Orden específico de las imágenes
+        const mediaItems = [
+            // P1 primero
+            { type: 'image', thumb: 'assets/thumbs/images/p1.jpg', full: 'assets/media/images/p1.jpg' },
+
+            // Temática V
+            { type: 'image', thumb: 'assets/thumbs/images/v1.jpg', full: 'assets/media/images/v1.jpg' },
+            { type: 'image', thumb: 'assets/thumbs/images/v2.jpg', full: 'assets/media/images/v2.jpg' },
+            { type: 'image', thumb: 'assets/thumbs/images/v3.jpg', full: 'assets/media/images/v3.jpg' },
+            { type: 'image', thumb: 'assets/thumbs/images/v4.jpg', full: 'assets/media/images/v4.jpg' },
+            { type: 'image', thumb: 'assets/thumbs/images/v5.jpg', full: 'assets/media/images/v5.jpg' },
+            { type: 'image', thumb: 'assets/thumbs/images/v6.jpg', full: 'assets/media/images/v6.jpg' },
+            { type: 'image', thumb: 'assets/thumbs/images/v7.jpg', full: 'assets/media/images/v7.jpg' },
+            { type: 'image', thumb: 'assets/thumbs/images/v8.jpg', full: 'assets/media/images/v8.jpg' },
+            { type: 'image', thumb: 'assets/thumbs/images/v9.jpg', full: 'assets/media/images/v9.jpg' },
+
+            // Temática N
+            { type: 'image', thumb: 'assets/thumbs/images/n1.jpg', full: 'assets/media/images/n1.jpg' },
+            { type: 'image', thumb: 'assets/thumbs/images/n2.jpg', full: 'assets/media/images/n2.jpg' },
+            { type: 'image', thumb: 'assets/thumbs/images/n3.jpg', full: 'assets/media/images/n3.jpg' },
+
+            // Demás
+            { type: 'image', thumb: 'assets/thumbs/images/i1.jpg', full: 'assets/media/images/i1.jpg' },
+            { type: 'image', thumb: 'assets/thumbs/images/i2.jpg', full: 'assets/media/images/i2.jpg' },
+            { type: 'image', thumb: 'assets/thumbs/images/i3.jpg', full: 'assets/media/images/i3.jpg' },
+            { type: 'image', thumb: 'assets/thumbs/images/r1.jpg', full: 'assets/media/images/r1.jpg' },
+            { type: 'image', thumb: 'assets/thumbs/images/r2.jpg', full: 'assets/media/images/r2.jpg' },
+            { type: 'image', thumb: 'assets/thumbs/images/r3.jpg', full: 'assets/media/images/r3.jpg' },
+
+            // PDFs
+            { type: 'pdf', full: 'assets/media/pdfs/angel-soto-trejo-innovatec-regional.pdf' },
+            { type: 'pdf', full: 'assets/media/pdfs/congreso-reconocimiento-soto-trejo-angel.pdf' },
+            { type: 'pdf', full: 'assets/media/pdfs/constancia-innobotica.pdf' },
+            { type: 'pdf', full: 'assets/media/pdfs/constancia-semana-lince-2025.pdf' },
+            { type: 'pdf', full: 'assets/media/pdfs/empmanagement-2-0-reconocimiento-soto-trejo-angel.pdf' },
+            { type: 'pdf', full: 'assets/media/pdfs/feria-proyectos-linces-2025.pdf' },
+            { type: 'pdf', full: 'assets/media/pdfs/ganador-rally-latinoamericano-2025-sp.pdf' },
+            { type: 'pdf', full: 'assets/media/pdfs/guanajuato-volks-constancia.pdf' },
+            { type: 'pdf', full: 'assets/media/pdfs/reconocimiento-cisti2025.pdf' },
+            { type: 'pdf', full: 'assets/media/pdfs/reconocimiento-curso-ia.pdf' },
+            { type: 'pdf', full: 'assets/media/pdfs/reconocimiento-innovatec-primer-lugar.pdf' },
+            { type: 'pdf', full: 'assets/media/pdfs/reconocimientohcm24-angelsoto.pdf' }
+        ];
+
+        let currentIndex = 0;
+
+        // Renderizar galería
+        const gallery = document.getElementById('gallery');
+        mediaItems.forEach((item, index) => {
+            const div = document.createElement('div');
+            div.className = `gallery-item ${item.type}`;
+
+            if (item.type === 'image') {
+                const img = document.createElement('img');
+                img.src = item.thumb;
+                img.alt = '';
+                img.loading = 'lazy';
+                div.appendChild(img);
+            }
+
+            div.onclick = () => openModal(index);
+            gallery.appendChild(div);
+        });
+
+        function openModal(index) {
+            currentIndex = index;
+            const modal = document.getElementById('modal');
+            const content = document.getElementById('modalContent');
+            const item = mediaItems[index];
+
+            content.innerHTML = '';
+
+            if (item.type === 'image') {
+                const img = document.createElement('img');
+                img.src = item.full;
+                img.alt = '';
+                content.appendChild(img);
+            } else if (item.type === 'pdf') {
+                const iframe = document.createElement('iframe');
+                iframe.src = item.full;
+                content.appendChild(iframe);
+            }
+
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('modal');
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        function navigate(direction) {
+            currentIndex += direction;
+            if (currentIndex < 0) currentIndex = mediaItems.length - 1;
+            if (currentIndex >= mediaItems.length) currentIndex = 0;
+            openModal(currentIndex);
+        }
+
+        // Cerrar con ESC
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeModal();
+            if (e.key === 'ArrowLeft') navigate(-1);
+            if (e.key === 'ArrowRight') navigate(1);
+        });
+
+        // Cerrar al hacer clic fuera del contenido
+        document.getElementById('modal').addEventListener('click', (e) => {
+            if (e.target.id === 'modal') closeModal();
+        });
+    </script>
 </body>
 </html>
