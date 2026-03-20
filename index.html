@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Angel Soto Trejo | Evidencias y reconocimientos</title>
+  <meta name="description" content="Portafolio estático de reconocimientos en PDF y evidencias fotográficas. Optimizado para GitHub Pages.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <div class="brand">
+        <div class="brand-mark">AS</div>
+        <div class="brand-copy">
+          <strong>Angel Soto Trejo</strong>
+          <span>Portafolio de evidencias</span>
+        </div>
+      </div>
+      <nav class="nav-inline" aria-label="Secciones">
+        <a class="nav-link" href="#inicio">Inicio</a>
+        <a class="nav-link" href="#reconocimientos">Reconocimientos</a>
+        <a class="nav-link" href="#fotografias">Fotografías</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="inicio">
+      <div class="container hero-grid">
+        <article class="hero-card">
+          <span class="eyebrow">GitHub Pages • Diseño minimalista • Responsive</span>
+          <h1>Evidencias que respaldan mi trayectoria.</h1>
+          <p>
+            Este sitio reúne reconocimientos en PDF y evidencias fotográficas en una sola página,
+            con visualización limpia, ordenada y adaptada a distintos formatos para que cada archivo
+            pueda consultarse de forma clara desde escritorio o móvil.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-dark" href="#reconocimientos">Ver reconocimientos</a>
+            <a class="btn" href="#fotografias">Ver fotografías</a>
+          </div>
+        </article>
+
+        <div class="metric-grid">
+          <article class="metric panel">
+            <strong class="js-total-count">31</strong>
+            <span>Evidencias totales</span>
+          </article>
+          <article class="metric panel">
+            <strong class="js-pdf-count">12</strong>
+            <span>Reconocimientos PDF</span>
+          </article>
+          <article class="metric panel">
+            <strong class="js-image-count">19</strong>
+            <span>Evidencias fotográficas</span>
+          </article>
+          <article class="metric panel">
+            <strong>100%</strong>
+            <span>Listo para publicar en GitHub Pages</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="controls">
+      <div class="container">
+        <div class="controls-card panel">
+          <div class="controls-row">
+            <div class="filter-group" aria-label="Filtros">
+              <button class="filter-btn active" data-filter="all">Todo</button>
+              <button class="filter-btn" data-filter="pdf">Solo PDFs</button>
+              <button class="filter-btn" data-filter="image">Solo fotos</button>
+            </div>
+            <label class="search" aria-label="Buscar evidencias">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M21 21l-4.35-4.35m1.85-5.15a7 7 0 11-14 0 7 7 0 0114 0z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+              <input id="search-input" type="search" placeholder="Buscar por nombre de archivo o reconocimiento">
+            </label>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <span class="section-anchor" id="reconocimientos"></span>
+    <section class="container" id="pdf-section-wrap">
+      <div class="section-header">
+        <div>
+          <h2>Reconocimientos y constancias</h2>
+          <p>Vista previa de cada PDF con acceso directo al archivo completo para consulta o validación.</p>
+        </div>
+        <div class="section-count"><span class="js-pdf-count">12</span> archivos</div>
+      </div>
+      <div class="grid" id="pdf-grid"></div>
+      <div class="empty-state hidden" id="pdf-empty">No se encontraron reconocimientos que coincidan con tu búsqueda.</div>
+    </section>
+
+    <span class="section-anchor" id="fotografias"></span>
+    <section class="container" id="image-section-wrap">
+      <div class="section-header">
+        <div>
+          <h2>Evidencias fotográficas</h2>
+          <p>Galería optimizada para mostrar fotografías horizontales, verticales y cuadradas sin recortes forzados.</p>
+        </div>
+        <div class="section-count"><span class="js-image-count">19</span> imágenes</div>
+      </div>
+      <div class="grid" id="image-grid"></div>
+      <div class="empty-state hidden" id="image-empty">No se encontraron fotografías que coincidan con tu búsqueda.</div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-card panel">
+        <p>
+          Sitio estático diseñado para funcionar directamente en GitHub Pages. Solo necesitas subir el contenido del proyecto
+          a un repositorio y activar Pages para compartir tu portafolio mediante un enlace público.
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <div class="modal" id="preview-modal" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="modal-dialog">
+      <div class="modal-top">
+        <div class="modal-title" id="modal-title">Vista previa</div>
+        <div class="modal-actions">
+          <a class="btn" id="modal-open-file" href="#" target="_blank" rel="noopener">Abrir archivo</a>
+          <button class="modal-close" id="modal-close" aria-label="Cerrar">×</button>
+        </div>
+      </div>
+      <div class="modal-content" id="modal-content"></div>
+    </div>
+  </div>
+
+  <script src="assets/js/gallery-data.js"></script>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>
