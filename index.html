@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Galería</title>
+    <title>Angel Soto Trejo - Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
     <style>
         * {
             margin: 0;
@@ -12,55 +14,91 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background: #fafafa;
-            padding: 40px 20px;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #f5f5f5;
+            color: #1a1a1a;
             min-height: 100vh;
         }
 
-        .gallery {
-            max-width: 1400px;
+        .header {
+            text-align: center;
+            padding: 60px 20px 40px;
+            background: linear-gradient(to bottom, #ffffff, #f5f5f5);
+        }
+
+        .header h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 48px;
+            font-weight: 300;
+            letter-spacing: 2px;
+            color: #1a1a1a;
+            margin-bottom: 10px;
+        }
+
+        .container {
+            max-width: 1600px;
             margin: 0 auto;
+            padding: 0 40px 60px;
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 24px;
-            padding: 20px;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+        }
+
+        .section {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 32px;
+            font-weight: 400;
+            letter-spacing: 1px;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #d0d0d0;
+            color: #2a2a2a;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 20px;
         }
 
         .gallery-item {
             position: relative;
             cursor: pointer;
             overflow: hidden;
-            border-radius: 4px;
+            border-radius: 2px;
             background: #fff;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
             transition: all 0.3s ease;
             aspect-ratio: 4/3;
         }
 
         .gallery-item:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
         }
 
-        .gallery-item img {
+        .gallery-item img,
+        .gallery-item canvas {
             width: 100%;
             height: 100%;
             object-fit: cover;
             display: block;
         }
 
-        .gallery-item.pdf {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        .pdf-loading {
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
-            font-size: 48px;
-        }
-
-        .gallery-item.pdf::after {
-            content: '📄';
+            width: 100%;
+            height: 100%;
+            background: #f9f9f9;
+            color: #666;
+            font-size: 14px;
         }
 
         /* Modal */
@@ -71,9 +109,9 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.95);
+            background: rgba(0, 0, 0, 0.96);
             z-index: 1000;
-            animation: fadeIn 0.3s ease;
+            animation: fadeIn 0.25s ease;
         }
 
         .modal.active {
@@ -83,33 +121,31 @@
         }
 
         .modal-content {
-            max-width: 90%;
-            max-height: 90%;
+            max-width: 95%;
+            max-height: 95%;
             position: relative;
-            animation: zoomIn 0.3s ease;
+            animation: slideUp 0.3s ease;
         }
 
         .modal-content img {
             max-width: 100%;
             max-height: 90vh;
             display: block;
-            border-radius: 4px;
         }
 
         .modal-content iframe {
-            width: 90vw;
+            width: 85vw;
             height: 90vh;
             border: none;
-            border-radius: 4px;
             background: white;
         }
 
         .modal-close {
             position: fixed;
-            top: 20px;
-            right: 30px;
+            top: 25px;
+            right: 35px;
             color: white;
-            font-size: 40px;
+            font-size: 36px;
             cursor: pointer;
             z-index: 1001;
             width: 50px;
@@ -117,9 +153,10 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(255, 255, 255, 0.1);
             border-radius: 50%;
             transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
         }
 
         .modal-close:hover {
@@ -132,18 +169,19 @@
             top: 50%;
             transform: translateY(-50%);
             color: white;
-            font-size: 48px;
+            font-size: 42px;
             cursor: pointer;
             z-index: 1001;
-            width: 60px;
-            height: 60px;
+            width: 55px;
+            height: 55px;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(255, 255, 255, 0.1);
             border-radius: 50%;
             transition: all 0.3s ease;
             user-select: none;
+            backdrop-filter: blur(10px);
         }
 
         .modal-nav:hover {
@@ -151,11 +189,11 @@
         }
 
         .modal-prev {
-            left: 20px;
+            left: 25px;
         }
 
         .modal-next {
-            right: 20px;
+            right: 25px;
         }
 
         @keyframes fadeIn {
@@ -163,20 +201,54 @@
             to { opacity: 1; }
         }
 
-        @keyframes zoomIn {
-            from { transform: scale(0.8); opacity: 0; }
-            to { transform: scale(1); opacity: 1; }
+        @keyframes slideUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
         }
 
-        @media (max-width: 768px) {
-            .gallery {
-                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-                gap: 12px;
-                padding: 10px;
+        @media (max-width: 1024px) {
+            .container {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                padding: 0 20px 40px;
             }
 
-            body {
-                padding: 20px 10px;
+            .header h1 {
+                font-size: 36px;
+            }
+
+            .section-title {
+                font-size: 28px;
+            }
+
+            .gallery {
+                grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+                gap: 15px;
+            }
+
+            .modal-content iframe {
+                width: 95vw;
+                height: 85vh;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .header {
+                padding: 40px 20px 30px;
+            }
+
+            .header h1 {
+                font-size: 28px;
+                letter-spacing: 1px;
+            }
+
+            .section-title {
+                font-size: 24px;
+            }
+
+            .gallery {
+                grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+                gap: 12px;
             }
 
             .modal-nav {
@@ -188,7 +260,7 @@
             .modal-close {
                 width: 40px;
                 height: 40px;
-                font-size: 32px;
+                font-size: 28px;
                 top: 15px;
                 right: 15px;
             }
@@ -196,7 +268,21 @@
     </style>
 </head>
 <body>
-    <div class="gallery" id="gallery"></div>
+    <div class="header">
+        <h1>Angel Soto Trejo</h1>
+    </div>
+
+    <div class="container">
+        <div class="section">
+            <h2 class="section-title">Evidencias</h2>
+            <div class="gallery" id="photosGallery"></div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">Reconocimientos</h2>
+            <div class="gallery" id="documentsGallery"></div>
+        </div>
+    </div>
 
     <div class="modal" id="modal">
         <div class="modal-close" onclick="closeModal()">&times;</div>
@@ -206,12 +292,10 @@
     </div>
 
     <script>
-        // Orden específico de las imágenes
-        const mediaItems = [
-            // P1 primero
-            { type: 'image', thumb: 'assets/thumbs/images/p1.jpg', full: 'assets/media/images/p1.jpg' },
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
 
-            // Temática V
+        const photos = [
+            { type: 'image', thumb: 'assets/thumbs/images/p1.jpg', full: 'assets/media/images/p1.jpg' },
             { type: 'image', thumb: 'assets/thumbs/images/v1.jpg', full: 'assets/media/images/v1.jpg' },
             { type: 'image', thumb: 'assets/thumbs/images/v2.jpg', full: 'assets/media/images/v2.jpg' },
             { type: 'image', thumb: 'assets/thumbs/images/v3.jpg', full: 'assets/media/images/v3.jpg' },
@@ -221,21 +305,18 @@
             { type: 'image', thumb: 'assets/thumbs/images/v7.jpg', full: 'assets/media/images/v7.jpg' },
             { type: 'image', thumb: 'assets/thumbs/images/v8.jpg', full: 'assets/media/images/v8.jpg' },
             { type: 'image', thumb: 'assets/thumbs/images/v9.jpg', full: 'assets/media/images/v9.jpg' },
-
-            // Temática N
             { type: 'image', thumb: 'assets/thumbs/images/n1.jpg', full: 'assets/media/images/n1.jpg' },
             { type: 'image', thumb: 'assets/thumbs/images/n2.jpg', full: 'assets/media/images/n2.jpg' },
             { type: 'image', thumb: 'assets/thumbs/images/n3.jpg', full: 'assets/media/images/n3.jpg' },
-
-            // Demás
             { type: 'image', thumb: 'assets/thumbs/images/i1.jpg', full: 'assets/media/images/i1.jpg' },
             { type: 'image', thumb: 'assets/thumbs/images/i2.jpg', full: 'assets/media/images/i2.jpg' },
             { type: 'image', thumb: 'assets/thumbs/images/i3.jpg', full: 'assets/media/images/i3.jpg' },
             { type: 'image', thumb: 'assets/thumbs/images/r1.jpg', full: 'assets/media/images/r1.jpg' },
             { type: 'image', thumb: 'assets/thumbs/images/r2.jpg', full: 'assets/media/images/r2.jpg' },
-            { type: 'image', thumb: 'assets/thumbs/images/r3.jpg', full: 'assets/media/images/r3.jpg' },
+            { type: 'image', thumb: 'assets/thumbs/images/r3.jpg', full: 'assets/media/images/r3.jpg' }
+        ];
 
-            // PDFs
+        const documents = [
             { type: 'pdf', full: 'assets/media/pdfs/angel-soto-trejo-innovatec-regional.pdf' },
             { type: 'pdf', full: 'assets/media/pdfs/congreso-reconocimiento-soto-trejo-angel.pdf' },
             { type: 'pdf', full: 'assets/media/pdfs/constancia-innobotica.pdf' },
@@ -250,31 +331,80 @@
             { type: 'pdf', full: 'assets/media/pdfs/reconocimientohcm24-angelsoto.pdf' }
         ];
 
+        const allItems = [...photos, ...documents];
         let currentIndex = 0;
 
-        // Renderizar galería
-        const gallery = document.getElementById('gallery');
-        mediaItems.forEach((item, index) => {
+        // Renderizar fotos
+        const photosGallery = document.getElementById('photosGallery');
+        photos.forEach((item, index) => {
             const div = document.createElement('div');
-            div.className = `gallery-item ${item.type}`;
+            div.className = 'gallery-item';
 
-            if (item.type === 'image') {
-                const img = document.createElement('img');
-                img.src = item.thumb;
-                img.alt = '';
-                img.loading = 'lazy';
-                div.appendChild(img);
-            }
+            const img = document.createElement('img');
+            img.src = item.thumb;
+            img.alt = '';
+            img.loading = 'lazy';
+            div.appendChild(img);
 
             div.onclick = () => openModal(index);
-            gallery.appendChild(div);
+            photosGallery.appendChild(div);
         });
+
+        // Renderizar documentos con vista previa PDF
+        const documentsGallery = document.getElementById('documentsGallery');
+        documents.forEach((item, docIndex) => {
+            const globalIndex = photos.length + docIndex;
+            const div = document.createElement('div');
+            div.className = 'gallery-item';
+
+            const loadingDiv = document.createElement('div');
+            loadingDiv.className = 'pdf-loading';
+            loadingDiv.textContent = 'Cargando...';
+            div.appendChild(loadingDiv);
+
+            // Generar vista previa del PDF
+            renderPDFThumbnail(item.full, div, loadingDiv);
+
+            div.onclick = () => openModal(globalIndex);
+            documentsGallery.appendChild(div);
+        });
+
+        async function renderPDFThumbnail(url, container, loadingDiv) {
+            try {
+                const pdf = await pdfjsLib.getDocument(url).promise;
+                const page = await pdf.getPage(1);
+
+                const viewport = page.getViewport({ scale: 1 });
+                const canvas = document.createElement('canvas');
+                const context = canvas.getContext('2d');
+
+                // Calcular escala para el thumbnail
+                const containerWidth = 280;
+                const scale = containerWidth / viewport.width;
+                const scaledViewport = page.getViewport({ scale: scale });
+
+                canvas.width = scaledViewport.width;
+                canvas.height = scaledViewport.height;
+
+                await page.render({
+                    canvasContext: context,
+                    viewport: scaledViewport
+                }).promise;
+
+                loadingDiv.remove();
+                container.appendChild(canvas);
+            } catch (error) {
+                loadingDiv.textContent = '📄';
+                loadingDiv.style.fontSize = '48px';
+                console.error('Error cargando PDF:', error);
+            }
+        }
 
         function openModal(index) {
             currentIndex = index;
             const modal = document.getElementById('modal');
             const content = document.getElementById('modalContent');
-            const item = mediaItems[index];
+            const item = allItems[index];
 
             content.innerHTML = '';
 
@@ -301,19 +431,17 @@
 
         function navigate(direction) {
             currentIndex += direction;
-            if (currentIndex < 0) currentIndex = mediaItems.length - 1;
-            if (currentIndex >= mediaItems.length) currentIndex = 0;
+            if (currentIndex < 0) currentIndex = allItems.length - 1;
+            if (currentIndex >= allItems.length) currentIndex = 0;
             openModal(currentIndex);
         }
 
-        // Cerrar con ESC
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') closeModal();
             if (e.key === 'ArrowLeft') navigate(-1);
             if (e.key === 'ArrowRight') navigate(1);
         });
 
-        // Cerrar al hacer clic fuera del contenido
         document.getElementById('modal').addEventListener('click', (e) => {
             if (e.target.id === 'modal') closeModal();
         });
