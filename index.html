@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Angel Soto Trejo - Portfolio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
     <style>
         * {
@@ -14,34 +14,56 @@
         }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: #f5f5f5;
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(to bottom, #f8f9fa, #e9ecef);
             color: #1a1a1a;
             min-height: 100vh;
         }
 
         .header {
             text-align: center;
-            padding: 60px 20px 40px;
-            background: linear-gradient(to bottom, #ffffff, #f5f5f5);
+            padding: 70px 20px 50px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.5);
         }
 
         .header h1 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 48px;
+            font-family: 'Playfair Display', serif;
+            font-size: 56px;
+            font-weight: 600;
+            letter-spacing: 3px;
+            color: #ffffff;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .header p {
+            font-size: 16px;
             font-weight: 300;
-            letter-spacing: 2px;
-            color: #1a1a1a;
-            margin-bottom: 10px;
+            letter-spacing: 1px;
+            color: rgba(255, 255, 255, 0.95);
+            text-transform: uppercase;
         }
 
         .container {
-            max-width: 1600px;
+            max-width: 1800px;
             margin: 0 auto;
             padding: 0 40px 60px;
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
+            grid-template-columns: 1.4fr 0.6fr;
+            gap: 50px;
         }
 
         .section {
@@ -50,36 +72,72 @@
         }
 
         .section-title {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 32px;
-            font-weight: 400;
-            letter-spacing: 1px;
-            margin-bottom: 30px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid #d0d0d0;
-            color: #2a2a2a;
+            font-family: 'Playfair Display', serif;
+            font-size: 36px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            margin: 40px 0 35px;
+            padding: 20px;
+            text-align: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 4px;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section-title::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .section-title:hover::before {
+            left: 100%;
         }
 
         .gallery {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-            gap: 20px;
+            gap: 24px;
+        }
+
+        .photos-gallery {
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+        }
+
+        .documents-gallery {
+            grid-template-columns: 1fr;
         }
 
         .gallery-item {
             position: relative;
             cursor: pointer;
             overflow: hidden;
-            border-radius: 2px;
+            border-radius: 4px;
             background: #fff;
-            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+            transition: all 0.35s ease;
+        }
+
+        .photos-gallery .gallery-item {
             aspect-ratio: 4/3;
         }
 
+        .documents-gallery .gallery-item {
+            aspect-ratio: 8.5/11;
+            height: auto;
+            min-height: 420px;
+        }
+
         .gallery-item:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.25);
         }
 
         .gallery-item img,
@@ -96,9 +154,10 @@
             justify-content: center;
             width: 100%;
             height: 100%;
-            background: #f9f9f9;
-            color: #666;
-            font-size: 14px;
+            background: linear-gradient(135deg, #667eea15, #764ba215);
+            color: #667eea;
+            font-size: 16px;
+            font-weight: 500;
         }
 
         /* Modal */
@@ -109,7 +168,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.96);
+            background: rgba(0, 0, 0, 0.97);
             z-index: 1000;
             animation: fadeIn 0.25s ease;
         }
@@ -129,15 +188,17 @@
 
         .modal-content img {
             max-width: 100%;
-            max-height: 90vh;
+            max-height: 92vh;
             display: block;
+            box-shadow: 0 10px 50px rgba(0, 0, 0, 0.5);
         }
 
         .modal-content iframe {
             width: 85vw;
-            height: 90vh;
+            height: 92vh;
             border: none;
             background: white;
+            box-shadow: 0 10px 50px rgba(0, 0, 0, 0.5);
         }
 
         .modal-close {
@@ -153,14 +214,14 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(102, 126, 234, 0.4);
             border-radius: 50%;
             transition: all 0.3s ease;
             backdrop-filter: blur(10px);
         }
 
         .modal-close:hover {
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(102, 126, 234, 0.7);
             transform: rotate(90deg);
         }
 
@@ -177,7 +238,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(102, 126, 234, 0.4);
             border-radius: 50%;
             transition: all 0.3s ease;
             user-select: none;
@@ -185,7 +246,7 @@
         }
 
         .modal-nav:hover {
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(102, 126, 234, 0.7);
         }
 
         .modal-prev {
@@ -206,24 +267,47 @@
             to { transform: translateY(0); opacity: 1; }
         }
 
-        @media (max-width: 1024px) {
+        @media (max-width: 1200px) {
             .container {
                 grid-template-columns: 1fr;
-                gap: 40px;
-                padding: 0 20px 40px;
+                gap: 30px;
             }
 
+            .documents-gallery {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            }
+
+            .documents-gallery .gallery-item {
+                min-height: 380px;
+            }
+        }
+
+        @media (max-width: 768px) {
             .header h1 {
-                font-size: 36px;
+                font-size: 38px;
+                letter-spacing: 2px;
+            }
+
+            .header p {
+                font-size: 13px;
             }
 
             .section-title {
                 font-size: 28px;
+                padding: 15px;
             }
 
-            .gallery {
-                grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            .photos-gallery {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
                 gap: 15px;
+            }
+
+            .documents-gallery {
+                grid-template-columns: 1fr;
+            }
+
+            .documents-gallery .gallery-item {
+                min-height: 350px;
             }
 
             .modal-content iframe {
@@ -231,56 +315,23 @@
                 height: 85vh;
             }
         }
-
-        @media (max-width: 640px) {
-            .header {
-                padding: 40px 20px 30px;
-            }
-
-            .header h1 {
-                font-size: 28px;
-                letter-spacing: 1px;
-            }
-
-            .section-title {
-                font-size: 24px;
-            }
-
-            .gallery {
-                grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-                gap: 12px;
-            }
-
-            .modal-nav {
-                width: 45px;
-                height: 45px;
-                font-size: 32px;
-            }
-
-            .modal-close {
-                width: 40px;
-                height: 40px;
-                font-size: 28px;
-                top: 15px;
-                right: 15px;
-            }
-        }
     </style>
 </head>
 <body>
     <div class="header">
         <h1>Angel Soto Trejo</h1>
+        <p>Computer Systems Engineering Student • Tecnológico de Celaya</p>
     </div>
 
     <div class="container">
         <div class="section">
-            <h2 class="section-title">Evidencias</h2>
-            <div class="gallery" id="photosGallery"></div>
+            <h2 class="section-title">Evidence</h2>
+            <div class="gallery photos-gallery" id="photosGallery"></div>
         </div>
 
         <div class="section">
-            <h2 class="section-title">Reconocimientos</h2>
-            <div class="gallery" id="documentsGallery"></div>
+            <h2 class="section-title">Recognitions</h2>
+            <div class="gallery documents-gallery" id="documentsGallery"></div>
         </div>
     </div>
 
@@ -355,11 +406,11 @@
         documents.forEach((item, docIndex) => {
             const globalIndex = photos.length + docIndex;
             const div = document.createElement('div');
-            div.className = 'gallery-item';
+            div.className = 'gallery-item pdf-item';
 
             const loadingDiv = document.createElement('div');
             loadingDiv.className = 'pdf-loading';
-            loadingDiv.textContent = 'Cargando...';
+            loadingDiv.textContent = 'Loading preview...';
             div.appendChild(loadingDiv);
 
             // Generar vista previa del PDF
@@ -378,10 +429,10 @@
                 const canvas = document.createElement('canvas');
                 const context = canvas.getContext('2d');
 
-                // Calcular escala para el thumbnail
-                const containerWidth = 280;
+                // Escala optimizada para vista previa completa
+                const containerWidth = 400;
                 const scale = containerWidth / viewport.width;
-                const scaledViewport = page.getViewport({ scale: scale });
+                const scaledViewport = page.getViewport({ scale: scale * 1.5 });
 
                 canvas.width = scaledViewport.width;
                 canvas.height = scaledViewport.height;
@@ -394,9 +445,8 @@
                 loadingDiv.remove();
                 container.appendChild(canvas);
             } catch (error) {
-                loadingDiv.textContent = '📄';
-                loadingDiv.style.fontSize = '48px';
-                console.error('Error cargando PDF:', error);
+                loadingDiv.innerHTML = '<span style="font-size: 64px;">📄</span>';
+                console.error('Error loading PDF:', error);
             }
         }
 
