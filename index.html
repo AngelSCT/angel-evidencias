@@ -18,11 +18,12 @@
             background: linear-gradient(to bottom, #f8f9fa, #e9ecef);
             color: #1a1a1a;
             min-height: 100vh;
+            overflow-x: hidden;
         }
 
         .header {
             text-align: center;
-            padding: 50px 20px 50px;
+            padding: 40px 20px 40px;
             background: linear-gradient(to right, #117533 0%, #1B396A 30%, #1B396A 100%);
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
             position: relative;
@@ -54,7 +55,7 @@
         }
 
         .logo {
-            height: 80px;
+            height: 95px;
             width: auto;
             object-fit: contain;
         }
@@ -76,11 +77,11 @@
 
         .header h1 {
             font-family: 'Montserrat', sans-serif;
-            font-size: 52px;
+            font-size: 42px;
             font-weight: 600;
             letter-spacing: 2px;
             color: #ffffff;
-            margin-bottom: 12px;
+            margin-bottom: 8px;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
         }
 
@@ -90,6 +91,149 @@
             letter-spacing: 0.8px;
             color: rgba(255, 255, 255, 0.95);
             text-transform: uppercase;
+            margin-bottom: 0;
+        }
+
+        .profile-photo-container {
+            margin-top: 15px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .profile-photo {
+            width: 170px;
+            height: 170px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid rgba(255, 255, 255, 0.9);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .profile-photo:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35);
+        }
+
+        .about-me-section {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(249, 250, 251, 0.95) 100%);
+            padding: 30px 20px 40px;
+            margin: 0;
+            border-bottom: 1px solid rgba(27, 57, 106, 0.1);
+        }
+
+        .about-me-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .about-me-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 32px;
+            font-weight: 600;
+            color: #1B396A;
+            margin-bottom: 24px;
+            letter-spacing: 1px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .about-me-title::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, #1B396A, #117533);
+        }
+
+        .about-me-content {
+            max-width: 850px;
+            margin: 35px auto 0;
+            padding: 30px 40px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(27, 57, 106, 0.1);
+        }
+
+        .about-me-content p {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #374151;
+            text-align: justify;
+            margin: 0;
+        }
+
+        .event-section {
+            margin-bottom: 50px;
+            padding: 0;
+        }
+
+        .event-header {
+            background: rgba(255, 255, 255, 0.6);
+            padding: 24px 30px;
+            border-radius: 8px;
+            margin-bottom: 24px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            border-left: 6px solid;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .event-header:hover {
+            transform: translateX(4px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+        }
+
+        .event-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 24px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin: 0 0 10px 0;
+            letter-spacing: 0.5px;
+        }
+
+        .event-description {
+            font-size: 15px;
+            color: #5f5f5f;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        .event-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            padding: 0;
+        }
+
+        .event-section[data-event="premio-estatal"] .event-header {
+            border-left-color: #3B82F6;
+            background: linear-gradient(to right, rgba(59, 130, 246, 0.08), rgba(255, 255, 255, 0.6));
+        }
+
+        .event-section[data-event="volkswagen"] .event-header {
+            border-left-color: #10B981;
+            background: linear-gradient(to right, rgba(16, 185, 129, 0.08), rgba(255, 255, 255, 0.6));
+        }
+
+        .event-section[data-event="nvidia"] .event-header {
+            border-left-color: #F59E0B;
+            background: linear-gradient(to right, rgba(245, 158, 11, 0.08), rgba(255, 255, 255, 0.6));
+        }
+
+        .event-section[data-event="innovatec"] .event-header {
+            border-left-color: #8B5CF6;
+            background: linear-gradient(to right, rgba(139, 92, 246, 0.08), rgba(255, 255, 255, 0.6));
+        }
+
+        .event-section[data-event="rally"] .event-header {
+            border-left-color: #EF4444;
+            background: linear-gradient(to right, rgba(239, 68, 68, 0.08), rgba(255, 255, 255, 0.6));
         }
 
         .container {
@@ -97,7 +241,7 @@
             margin: 0 auto;
             padding: 0 40px 60px;
             display: grid;
-            grid-template-columns: 0.6fr 1.4fr;
+            grid-template-columns: 0.5fr 1.5fr;
             gap: 50px;
         }
 
@@ -344,6 +488,242 @@
             to { transform: translateY(0); opacity: 1; }
         }
 
+        @keyframes slideInLeft {
+            from { transform: translateX(-40px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        @keyframes slideInRight {
+            from { transform: translateX(40px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        @keyframes fadeInScale {
+            from { transform: scale(0.95); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        @keyframes floatingAnimation {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes shimmer {
+            0% { background-position: -1000px 0; }
+            100% { background-position: 1000px 0; }
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        .header {
+            animation: slideDown 0.6s ease;
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .about-me-section {
+            animation: fadeInScale 0.8s ease 0.2s both;
+        }
+
+        .about-me-title {
+            animation: slideInLeft 0.6s ease 0.3s both;
+        }
+
+        .about-me-content {
+            animation: slideInRight 0.6s ease 0.4s both;
+        }
+
+        .section-title {
+            animation: fadeInScale 0.6s ease both;
+            transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .section-title:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(27, 57, 106, 0.4) !important;
+        }
+
+        .event-section {
+            animation: slideInLeft 0.6s ease both;
+        }
+
+        .event-section:nth-child(1) { animation-delay: 0.1s; }
+        .event-section:nth-child(2) { animation-delay: 0.2s; }
+        .event-section:nth-child(3) { animation-delay: 0.3s; }
+        .event-section:nth-child(4) { animation-delay: 0.4s; }
+        .event-section:nth-child(5) { animation-delay: 0.5s; }
+
+        .gallery-item {
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            animation: fadeInScale 0.5s ease both;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 12px 28px rgba(27, 57, 106, 0.4) !important;
+        }
+
+        .gallery-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, transparent, rgba(255,255,255,0.1));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .gallery-item:hover::before {
+            opacity: 1;
+        }
+
+        .badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #1B396A 0%, #117533 100%);
+            color: white;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            margin-right: 8px;
+            animation: fadeInScale 0.5s ease;
+        }
+
+        .event-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #1B396A, #117533);
+            border-radius: 8px 8px 0 0;
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+
+        .event-header:hover::before {
+            transform: scaleX(1);
+        }
+
+        .profile-photo {
+            animation: floatingAnimation 3s ease-in-out infinite;
+        }
+
+        .gallery-item:nth-child(1) { animation-delay: 0.1s; }
+        .gallery-item:nth-child(2) { animation-delay: 0.2s; }
+        .gallery-item:nth-child(3) { animation-delay: 0.3s; }
+        .gallery-item:nth-child(4) { animation-delay: 0.4s; }
+        .gallery-item:nth-child(5) { animation-delay: 0.5s; }
+
+        /* Footer Styles */
+        .footer {
+            background: linear-gradient(135deg, #1B396A 0%, #117533 100%);
+            padding: 30px 20px;
+            text-align: center;
+            color: white;
+            margin-top: 60px;
+            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
+            animation: slideUp 0.6s ease;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer p {
+            margin: 8px 0;
+            font-size: 14px;
+            letter-spacing: 0.5px;
+            font-weight: 400;
+        }
+
+        .footer-tagline {
+            font-style: italic;
+            font-size: 13px;
+            opacity: 0.9;
+            margin-top: 12px;
+        }
+
+        /* Scroll Animation */
+        .scroll-fade {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .scroll-fade.visible {
+            opacity: 1;
+            transform: translateY(0);
+            transition: all 0.6s ease;
+        }
+
+        /* Enhanced Title Animation */
+        .title-animated {
+            position: relative;
+            display: inline-block;
+        }
+
+        .title-animated::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #1B396A, #117533);
+            animation: expandWidth 0.8s ease 0.5s forwards;
+        }
+
+        @keyframes expandWidth {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        /* Staggered List Animation */
+        .stagger-item {
+            animation: slideInLeft 0.5s ease both;
+        }
+
+        .stagger-item:nth-child(1) { animation-delay: 0.1s; }
+        .stagger-item:nth-child(2) { animation-delay: 0.2s; }
+        .stagger-item:nth-child(3) { animation-delay: 0.3s; }
+        .stagger-item:nth-child(4) { animation-delay: 0.4s; }
+        .stagger-item:nth-child(5) { animation-delay: 0.5s; }
+
+        /* Text Gradient Animation */
+        .gradient-text {
+            background: linear-gradient(135deg, #1B396A 0%, #117533 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 200% 200%;
+            animation: gradientShift 3s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        /* Hover Glow Effect */
+        .glow-hover:hover {
+            box-shadow: 0 0 25px rgba(27, 57, 106, 0.4),
+                        0 0 50px rgba(17, 117, 51, 0.2) !important;
+        }
+
         @media (max-width: 1200px) {
             .container {
                 grid-template-columns: 1fr;
@@ -365,7 +745,7 @@
             }
 
             .logo {
-                height: 50px;
+                height: 65px;
             }
 
             .logo.left {
@@ -383,6 +763,51 @@
 
             .header p {
                 font-size: 11px;
+            }
+
+            .profile-photo {
+                width: 120px;
+                height: 120px;
+                border: 4px solid rgba(255, 255, 255, 0.9);
+            }
+
+            .profile-photo-container {
+                margin-top: 12px;
+            }
+
+            .about-me-section {
+                padding: 25px 15px 30px;
+            }
+
+            .about-me-title {
+                font-size: 26px;
+            }
+
+            .about-me-content {
+                padding: 20px 25px;
+            }
+
+            .about-me-content p {
+                font-size: 14px;
+                line-height: 1.7;
+                text-align: left;
+            }
+
+            .event-header {
+                padding: 18px 20px;
+            }
+
+            .event-title {
+                font-size: 20px;
+            }
+
+            .event-description {
+                font-size: 14px;
+            }
+
+            .event-gallery {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+                gap: 15px;
             }
 
             .section-title {
@@ -418,15 +843,36 @@
 
         @media (max-width: 480px) {
             .logo {
-                height: 40px;
+                height: 50px;
             }
 
             .header h1 {
-                font-size: 26px;
+                font-size: 24px;
             }
 
             .header p {
                 font-size: 9px;
+            }
+
+            .profile-photo {
+                width: 100px;
+                height: 100px;
+            }
+
+            .profile-photo-container {
+                margin-top: 10px;
+            }
+
+            .about-me-section {
+                padding: 20px 15px 25px;
+            }
+
+            .about-me-title {
+                font-size: 22px;
+            }
+
+            .about-me-content {
+                padding: 18px 20px;
             }
         }
     </style>
@@ -438,10 +884,22 @@
             <div class="header-content">
                 <h1>Angel Soto Trejo</h1>
                 <p>Computer Systems Engineering Student • Tecnológico de Celaya</p>
+                <div class="profile-photo-container">
+                    <img src="assets/media/images/v2.jpg" alt="Angel Soto Trejo" class="profile-photo">
+                </div>
             </div>
             <img src="assets/media/images/logoTecCelaya.png" alt="Tec Celaya" class="logo right">
         </div>
     </div>
+
+    <section class="about-me-section">
+        <div class="about-me-container">
+            <h2 class="about-me-title">About Me</h2>
+            <div class="about-me-content">
+                <p>I am Angel Soto Trejo, a future systems engineer focused on transforming technology into purposeful solutions. My journey has been built upon discipline, innovation, and a commitment to solving real-world problems through automation, artificial intelligence, and process improvement. More than developing projects, I seek to generate tangible impact, add value to the industry, and demonstrate that professionalism is also reflected in vision, perseverance, and the ability to transform ideas into results.</p>
+            </div>
+        </div>
+    </section>
 
     <div class="container">
         <div class="section">
@@ -450,8 +908,52 @@
         </div>
 
         <div class="section">
-            <h2 class="section-title">Evidence</h2>
-            <div class="gallery photos-gallery" id="photosGallery"></div>
+            <h2 class="section-title">My Journey</h2>
+
+            <!-- Event 1: State Merit Award (Blue #3B82F6) -->
+            <div class="event-section" data-event="premio-estatal">
+                <div class="event-header">
+                    <h3 class="event-title">🏆 State Merit Award for Labor Excellence</h3>
+                    <p class="event-description">State recognition for exceptional professional merit and outstanding technical achievements in the technology sector</p>
+                </div>
+                <div class="event-gallery" id="gallery-premio-estatal"></div>
+            </div>
+
+            <!-- Event 2: Volkswagen Innovation Challenge (Green #10B981) -->
+            <div class="event-section" data-event="volkswagen">
+                <div class="event-header">
+                    <h3 class="event-title">🚗 Volkswagen Innovation Challenge</h3>
+                    <p class="event-description">First Place in the Volkswagen Innovation Challenge, developing cutting-edge technological solutions for the automotive industry. Includes internship participation and winning team credentials across both competition stages</p>
+                </div>
+                <div class="event-gallery" id="gallery-volkswagen"></div>
+            </div>
+
+            <!-- Event 3: NVIDIA AI Congress (Orange #F59E0B) -->
+            <div class="event-section" data-event="nvidia">
+                <div class="event-header">
+                    <h3 class="event-title">🔬 NVIDIA AI Congress</h3>
+                    <p class="event-description">Participation in NVIDIA's Artificial Intelligence and Deep Learning Congress in Mexico City, exploring cutting-edge GPU-accelerated computing technologies and AI innovations</p>
+                </div>
+                <div class="event-gallery" id="gallery-nvidia"></div>
+            </div>
+
+            <!-- Event 4: InnovaTec Competition (Purple #8B5CF6) -->
+            <div class="event-section" data-event="innovatec">
+                <div class="event-header">
+                    <h3 class="event-title">💡 InnovaTec Competition</h3>
+                    <p class="event-description">Regional and local innovation competition by TecNM, showcasing innovative technological projects. First Place in local phase and regional participation with featured stand and project presentation</p>
+                </div>
+                <div class="event-gallery" id="gallery-innovatec"></div>
+            </div>
+
+            <!-- Event 5: Latin American Innovation Rally (Red #EF4444) -->
+            <div class="event-section" data-event="rally">
+                <div class="event-header">
+                    <h3 class="event-title">🌟 Latin American Innovation Rally</h3>
+                    <p class="event-description">First Place in the 2025 Latin American Innovation Rally, an international competition bringing together the best innovation projects across Latin America</p>
+                </div>
+                <div class="event-gallery" id="gallery-rally"></div>
+            </div>
         </div>
     </div>
 
@@ -462,68 +964,68 @@
         <div class="modal-content" id="modalContent"></div>
     </div>
 
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2025 Angel Soto Trejo. Computer Systems Engineer | Excellence in Innovation & Technology</p>
+            <p class="footer-tagline">Transforming Technology into Purpose | Building Future Solutions</p>
+        </div>
+    </footer>
+
     <script>
         pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
 
-        // Mapeo de nombres a descripciones
-        const photoDescriptions = {
-            'p1': 'Premio Estatal Merito Laboral',
-            'v1': '1st Volkswagen Desafio Team',
-            'v2': 'Me',
-            'v3': '1st Volkswagen Desafio Etapa 2',
-            'v4': 'Semifinal Presentation',
-            'v5': 'Volkswagen Desafio Team Credentials',
-            'v6': 'Volkswagen Desafio Team',
-            'v7': 'Volkswagen Intern Credential',
-            'v8': '1st Volkswagen Desafio Etapa 1',
-            'v9': 'Volkswagen Desafio Team',
-            'n1': 'NVIDIA CONGRESS (CDMX)',
-            'n2': 'NVIDIA CONGRESS (CDMX)',
-            'n3': 'NVIDIA CONGRESS (CDMX)',
-            'i1': 'InnovaTec Regional STAND',
-            'i2': 'Proyecto InnovaTec Regional',
-            'i3': 'InnovaTec Local',
-            'r1': '1st Rally Latinoamericano',
-            'r2': '1st Rally Latinoamericano',
-            'r3': 'Reconocimiento Rally Latinoamericano'
+        // Organización por eventos (v2 excluido - está en header)
+        const eventGroups = {
+            'premio-estatal': [
+                { type: 'image', thumb: 'assets/thumbs/images/p1.jpg', full: 'assets/media/images/p1.jpg', id: 'p1', caption: 'State Merit Award Labor Excellence' }
+            ],
+            'volkswagen': [
+                { type: 'image', thumb: 'assets/thumbs/images/v1.jpg', full: 'assets/media/images/v1.jpg', id: 'v1', caption: '1st Place Volkswagen Challenge Winning Team' },
+                { type: 'image', thumb: 'assets/thumbs/images/v3.jpg', full: 'assets/media/images/v3.jpg', id: 'v3', caption: '1st Place Volkswagen Challenge - Stage 2' },
+                { type: 'image', thumb: 'assets/thumbs/images/v4.jpg', full: 'assets/media/images/v4.jpg', id: 'v4', caption: 'Semifinal Presentation' },
+                { type: 'image', thumb: 'assets/thumbs/images/v5.jpg', full: 'assets/media/images/v5.jpg', id: 'v5', caption: 'Volkswagen Challenge Team Credentials' },
+                { type: 'image', thumb: 'assets/thumbs/images/v6.jpg', full: 'assets/media/images/v6.jpg', id: 'v6', caption: 'Volkswagen Challenge Team Group Photo' },
+                { type: 'image', thumb: 'assets/thumbs/images/v7.jpg', full: 'assets/media/images/v7.jpg', id: 'v7', caption: 'Volkswagen Internship Credential' },
+                { type: 'image', thumb: 'assets/thumbs/images/v8.jpg', full: 'assets/media/images/v8.jpg', id: 'v8', caption: '1st Place Volkswagen Challenge - Stage 1' },
+                { type: 'image', thumb: 'assets/thumbs/images/v9.jpg', full: 'assets/media/images/v9.jpg', id: 'v9', caption: 'Volkswagen Challenge Team' }
+            ],
+            'nvidia': [
+                { type: 'image', thumb: 'assets/thumbs/images/n1.jpg', full: 'assets/media/images/n1.jpg', id: 'n1', caption: 'NVIDIA AI Congress - Mexico City' },
+                { type: 'image', thumb: 'assets/thumbs/images/n2.jpg', full: 'assets/media/images/n2.jpg', id: 'n2', caption: 'NVIDIA AI Congress - Mexico City' },
+                { type: 'image', thumb: 'assets/thumbs/images/n3.jpg', full: 'assets/media/images/n3.jpg', id: 'n3', caption: 'NVIDIA AI Congress - Mexico City' }
+            ],
+            'innovatec': [
+                { type: 'image', thumb: 'assets/thumbs/images/i1.jpg', full: 'assets/media/images/i1.jpg', id: 'i1', caption: 'InnovaTec Regional Competition Stand' },
+                { type: 'image', thumb: 'assets/thumbs/images/i2.jpg', full: 'assets/media/images/i2.jpg', id: 'i2', caption: 'InnovaTec Regional Project Showcase' },
+                { type: 'image', thumb: 'assets/thumbs/images/i3.jpg', full: 'assets/media/images/i3.jpg', id: 'i3', caption: 'InnovaTec Local Competition' }
+            ],
+            'rally': [
+                { type: 'image', thumb: 'assets/thumbs/images/r1.jpg', full: 'assets/media/images/r1.jpg', id: 'r1', caption: '1st Place Latin American Innovation Rally 2025' },
+                { type: 'image', thumb: 'assets/thumbs/images/r2.jpg', full: 'assets/media/images/r2.jpg', id: 'r2', caption: '1st Place Latin American Innovation Rally 2025' },
+                { type: 'image', thumb: 'assets/thumbs/images/r3.jpg', full: 'assets/media/images/r3.jpg', id: 'r3', caption: 'Latin American Innovation Rally Recognition' }
+            ]
         };
 
         const pdfDescriptions = {
             'angel-soto-trejo-innovatec-regional.pdf': 'InnovaTec Regional 2025',
-            'empmanagement-2-0-reconocimiento-soto-trejo-angel.pdf': 'Empmanagement 2.0 PML 2024',
-            'reconocimientohcm24-angelsoto.pdf': 'HCM NACIONAL 2024',
-            'ganador-rally-latinoamericano-2025-sp.pdf': '1st Place Rally Latinoamericano 2025',
+            'empmanagement-2-0-reconocimiento-soto-trejo-angel.pdf': 'Empmanagement 2.0 Professional Merit 2024',
+            'reconocimientohcm24-angelsoto.pdf': 'National HCM Recognition 2024',
+            'ganador-rally-latinoamericano-2025-sp.pdf': '1st Place Latin American Innovation Rally 2025',
             'guanajuato-volks-constancia.pdf': 'Volkswagen Guanajuato Certificate',
-            'reconocimiento-curso-ia.pdf': 'AI Course',
-            'constancia-innobotica.pdf': 'Innobotica Certificate',
-            'congreso-reconocimiento-soto-trejo-angel.pdf': 'Congress International 2024',
-            'reconocimiento-innovatec-primer-lugar.pdf': '1st Place InnovaTec Local',
-            'constancia-semana-lince-2025.pdf': 'Semana Lince Ponencia 2025',
-            'reconocimiento-cisti2025.pdf': 'CISTI 2025 PONENCIA',
+            'reconocimiento-curso-ia.pdf': 'Artificial Intelligence Course Completion',
+            'constancia-innobotica.pdf': 'Innobotics Robotics Certificate',
+            'congreso-reconocimiento-soto-trejo-angel.pdf': 'International Congress Certificate 2024',
+            'reconocimiento-innovatec-primer-lugar.pdf': '1st Place InnovaTec Local Competition',
+            'constancia-semana-lince-2025.pdf': 'Semana Lince Presentation Certificate 2025',
+            'reconocimiento-cisti2025.pdf': 'CISTI 2025 Conference Presentation',
             'feria-proyectos-linces-2025.pdf': 'Feria de Proyectos Linces 2025'
         };
 
-        const photos = [
-            { type: 'image', thumb: 'assets/thumbs/images/p1.jpg', full: 'assets/media/images/p1.jpg', id: 'p1' },
-            { type: 'image', thumb: 'assets/thumbs/images/v1.jpg', full: 'assets/media/images/v1.jpg', id: 'v1' },
-            { type: 'image', thumb: 'assets/thumbs/images/v2.jpg', full: 'assets/media/images/v2.jpg', id: 'v2' },
-            { type: 'image', thumb: 'assets/thumbs/images/v3.jpg', full: 'assets/media/images/v3.jpg', id: 'v3' },
-            { type: 'image', thumb: 'assets/thumbs/images/v4.jpg', full: 'assets/media/images/v4.jpg', id: 'v4' },
-            { type: 'image', thumb: 'assets/thumbs/images/v5.jpg', full: 'assets/media/images/v5.jpg', id: 'v5' },
-            { type: 'image', thumb: 'assets/thumbs/images/v6.jpg', full: 'assets/media/images/v6.jpg', id: 'v6' },
-            { type: 'image', thumb: 'assets/thumbs/images/v7.jpg', full: 'assets/media/images/v7.jpg', id: 'v7' },
-            { type: 'image', thumb: 'assets/thumbs/images/v8.jpg', full: 'assets/media/images/v8.jpg', id: 'v8' },
-            { type: 'image', thumb: 'assets/thumbs/images/v9.jpg', full: 'assets/media/images/v9.jpg', id: 'v9' },
-            { type: 'image', thumb: 'assets/thumbs/images/n1.jpg', full: 'assets/media/images/n1.jpg', id: 'n1' },
-            { type: 'image', thumb: 'assets/thumbs/images/n2.jpg', full: 'assets/media/images/n2.jpg', id: 'n2' },
-            { type: 'image', thumb: 'assets/thumbs/images/n3.jpg', full: 'assets/media/images/n3.jpg', id: 'n3' },
-            { type: 'image', thumb: 'assets/thumbs/images/i1.jpg', full: 'assets/media/images/i1.jpg', id: 'i1' },
-            { type: 'image', thumb: 'assets/thumbs/images/i2.jpg', full: 'assets/media/images/i2.jpg', id: 'i2' },
-            { type: 'image', thumb: 'assets/thumbs/images/i3.jpg', full: 'assets/media/images/i3.jpg', id: 'i3' },
-            { type: 'image', thumb: 'assets/thumbs/images/r1.jpg', full: 'assets/media/images/r1.jpg', id: 'r1' },
-            { type: 'image', thumb: 'assets/thumbs/images/r2.jpg', full: 'assets/media/images/r2.jpg', id: 'r2' },
-            { type: 'image', thumb: 'assets/thumbs/images/r3.jpg', full: 'assets/media/images/r3.jpg', id: 'r3' }
-        ];
+        // Construir array plano de todas las fotos para navegación modal
+        const allPhotos = [];
+        Object.keys(eventGroups).forEach(eventKey => {
+            allPhotos.push(...eventGroups[eventKey]);
+        });
 
         const documents = [
             { type: 'pdf', full: 'assets/media/pdfs/angel-soto-trejo-innovatec-regional.pdf', id: 'angel-soto-trejo-innovatec-regional.pdf' },
@@ -540,38 +1042,44 @@
             { type: 'pdf', full: 'assets/media/pdfs/feria-proyectos-linces-2025.pdf', id: 'feria-proyectos-linces-2025.pdf' }
         ];
 
-        const allItems = [...documents, ...photos];
+        const allItems = [...documents, ...allPhotos];
         let currentIndex = 0;
 
-        // Renderizar fotos con descripciones
-        const photosGallery = document.getElementById('photosGallery');
-        photos.forEach((item, index) => {
-            const globalIndex = documents.length + index;
-            const div = document.createElement('div');
-            div.className = 'gallery-item';
+        // Renderizar fotos por evento
+        Object.keys(eventGroups).forEach(eventKey => {
+            const eventPhotos = eventGroups[eventKey];
+            const galleryContainer = document.getElementById(`gallery-${eventKey}`);
 
-            const photoCard = document.createElement('div');
-            photoCard.className = 'photo-card';
+            if (!galleryContainer) return;
 
-            const photoWrapper = document.createElement('div');
-            photoWrapper.className = 'photo-wrapper';
+            eventPhotos.forEach((item) => {
+                const globalIndex = documents.length + allPhotos.findIndex(p => p.id === item.id);
+                const div = document.createElement('div');
+                div.className = 'gallery-item';
 
-            const img = document.createElement('img');
-            img.src = item.thumb;
-            img.alt = '';
-            img.loading = 'lazy';
-            photoWrapper.appendChild(img);
+                const photoCard = document.createElement('div');
+                photoCard.className = 'photo-card';
 
-            const caption = document.createElement('div');
-            caption.className = 'photo-caption';
-            caption.textContent = photoDescriptions[item.id] || '';
+                const photoWrapper = document.createElement('div');
+                photoWrapper.className = 'photo-wrapper';
 
-            photoCard.appendChild(photoWrapper);
-            photoCard.appendChild(caption);
-            div.appendChild(photoCard);
+                const img = document.createElement('img');
+                img.src = item.thumb;
+                img.alt = item.caption;
+                img.loading = 'lazy';
+                photoWrapper.appendChild(img);
 
-            div.onclick = () => openModal(globalIndex);
-            photosGallery.appendChild(div);
+                const caption = document.createElement('div');
+                caption.className = 'photo-caption';
+                caption.textContent = item.caption;
+
+                photoCard.appendChild(photoWrapper);
+                photoCard.appendChild(caption);
+                div.appendChild(photoCard);
+
+                div.onclick = () => openModal(globalIndex);
+                galleryContainer.appendChild(div);
+            });
         });
 
         // Renderizar documentos con detección de orientación
@@ -588,7 +1096,7 @@
 
             const loadingDiv = document.createElement('div');
             loadingDiv.className = 'pdf-loading';
-            loadingDiv.textContent = 'Loading preview...';
+            loadingDiv.textContent = 'PDF Loading...';
             pdfWrapper.appendChild(loadingDiv);
 
             const caption = document.createElement('div');
@@ -689,6 +1197,24 @@
 
         document.getElementById('modal').addEventListener('click', (e) => {
             if (e.target.id === 'modal') closeModal();
+        });
+
+        // Scroll Animation Effect
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.event-section, .gallery-item, .section-title').forEach(el => {
+            observer.observe(el);
         });
     </script>
 </body>
